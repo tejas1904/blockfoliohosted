@@ -226,6 +226,19 @@ async function buyStock() {
     }
     const stockFtAddress = wm.stockNameToAddress[stockName.toString()];
 
+    // check if actually enough stock is up for sale
+    try {
+        const availableCount = await wm.portfolioContract.totalSellCount(stockFtAddress);
+        if (parseInt(availableCount.toString()) < parseInt(count)) {
+            alert("Not enough stock listed for sale.");
+            return;
+        }
+    } 
+    catch (error) {
+        console.error("Error checking available stock:", error);
+        alert("Could not verify stock availability.");
+        return;
+    }
     
     console.log("buying stock", stockName.toString(), " with address:", stockFtAddress, "and count:", count);
     const price = await getPrice(stockFtAddress, count);
