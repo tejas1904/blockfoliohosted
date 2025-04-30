@@ -228,7 +228,7 @@ async function buyStock() {
 
     // check if actually enough stock is up for sale
     try {
-        const availableCount = await wm.portfolioContract.totalSellCount(stockFtAddress);
+        const availableCount = await wm.portfolioContract._totalSellCount(stockFtAddress);
         if (parseInt(availableCount.toString()) < parseInt(count)) {
             alert("Not enough stock listed for sale. try a lesser amount");
             return;
