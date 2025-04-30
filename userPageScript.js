@@ -230,13 +230,13 @@ async function buyStock() {
     try {
         const availableCount = await wm.portfolioContract.totalSellCount(stockFtAddress);
         if (parseInt(availableCount.toString()) < parseInt(count)) {
-            alert("Not enough stock listed for sale.");
+            alert("Not enough stock listed for sale. try a lesser amount");
             return;
         }
     } 
     catch (error) {
         console.error("Error checking available stock:", error);
-        alert("Could not verify stock availability.");
+        alert("no one has listed this stock up for sale , try another one.");
         return;
     }
     
